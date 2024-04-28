@@ -57,12 +57,12 @@ public class DataCollectorService {
 		
 	}
 	
-	private void insertArtworkState(Artworks artWorks) {
+	protected void insertArtworkState(Artworks artWorks) {
 		String sql = "INSERT INTO public.artworkstate" + "(url)" + " VALUES (?)";
 		jdbcTemplate.update(sql, artWorks.getPagination().getNextUrl());
 	}
 
-	private String getNextPageFromDB() {
+	protected String getNextPageFromDB() {
 		List<Map<String, String>> list = runQuery();
 		if (list != null && list.size() > 0) {
 			String val = list.get(0).get("url");
@@ -90,7 +90,7 @@ public class DataCollectorService {
 				});
 	}
 
-	private void insertDatumObjects(Artworks artWorks) {
+	protected void insertDatumObjects(Artworks artWorks) {
 		String sql = "INSERT INTO public.datum"
 				+ "(idnum, title, main_reference_number, date_display, date_start, date_end, place_of_origin, description, inscriptions, publication_history, exhibition_history, provenance_text, artwork_type_title, artwork_type_id, gallery_title, gallery_id, department_title, department_id, artist_id, artist_title, style_id, style_title, classification_id, classification_title, material_id, image_id, source_updated_at, updated_at, timestampstr)"
 				+ " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
